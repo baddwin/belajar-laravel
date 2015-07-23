@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Hafal Quran Android App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+tr:nth-child(even) {background-color: #F2E0C6;}
+tr:nth-child(odd) {background-color: #1ABC9C;}
+tr th {
+  height: 35px;
+  background-color: green;
+  color: white;
+  text-align: left;
+}
+td, th {
+  padding: 4px 8px;
+}
+th a {
+  color: white;
+  text-decoration: none;
+}
+table, h2, h3, .tengah {border-spacing: 0;margin-left:auto;margin-right:auto;}
+.pager {font-size:1.5em;text-decoration:none;}
+.format {padding:0.8em 0.8em;background-color:#E4EDF4;border-radius:0.5em;}
+@media (min-width:48em){
+table {width:750px;}
+.table {width:750px;text-align:center;}
+}
+@media (max-width:48em){
+table {width:90%;}
+.table {width:90%;text-align:center;}
+}
+</style>
+<script type="text/javascript" src="script/angular.min.js"></script>
+</head>
+<body ng-app="statistikApp">
+<section ng-controller="urutkanTabel">
+    <h2 class="table">Statistik Hafal Quran</h2>
+    <h3 class="table"><a href="https://play.google.com/store/apps/details?id=id.web.amzone.hafalquran" target="_blank">Android App</a></h3>
+    <p style="text-align:center;"><?php echo $Tanggal;?></p>
+    <table>
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th><a href="" ng-click="reverse=!reverse;order('a', reverse)">User</a></th>
+            <th><a href="" ng-click="reverse=false;order('b', false)">Install</a> (<a href="" ng-click="order('-b',false)">^</a>)</th>
+            <th><a href="" ng-click="reverse=false;order('c', false)">Play count</a> (<a href="" ng-click="order('-c',false)">^</a>)</th>
+            <th><a href="" ng-click="reverse=!reverse;order('d', reverse)">Level</a></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr ng-repeat="stat in stats | orderBy:last:reverse">
+            <td>{{$index+1}}</td>
+            <td>{{stat.a}}</td>
+            <td>{{stat.b}}</td>
+            <td>{{stat.c}}</td>
+            <td>{{stat.d}}</td>
+        </tr>
+
+    </tbody>
+    </table>
+
+</section>
+
+<script type="text/javascript">
+var app = angular.module('statistikApp', []);
+app.controller('urutkanTabel', ['$scope', '$filter', function($scope, $filter) {
+  var orderBy = $filter('orderBy');
+  $scope.stats = [
+    {"a":"16c3caeb","b":"15.07.23","c":"22","d":114},
+    {"a":"00092198","b":"15.06.17","c":"23","d":111},
+    {"a":"e696a192","b":"15.07.23","c":"39","d":114},
+    {"a":"bf70aeac","b":"15.06.21","c":"54","d":100},
+    {"a":"6571a043","b":"15.07.23","c":"17","d":113},
+    {"a":"30bd6416","b":"15.07.01","c":"25","d":114},
+    {"a":"cbe65401","b":"15.07.23","c":"28","d":114},
+    {"a":"8febf0bc","b":"15.07.01","c":"11","d":105},
+    {"a":"c571c478","b":"15.07.15","c":"19","d":96}
+  ];
+  $scope.order = function(predicate, reverse) {
+    $scope.stats = orderBy($scope.stats, predicate, reverse);
+  };
+  $scope.order('-b',false);
+}]);
+</script>
+
+</body>
+</html>
