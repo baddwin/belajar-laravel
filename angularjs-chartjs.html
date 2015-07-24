@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Hafal Quran Android App: Daily Stats</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <style type="text/css">
+        .line-legend {
+            list-style: none;
+        }
+        .line-legend li span{
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            margin-right: 5px;
+        }
+        </style>
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <h2>Statistik untuk Hafal Quran, Game Edukatif Islami</h2>
+
+        <canvas id="diagram" width="800" height="400"></canvas>
+
+        <div id="chart-legend"></div>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+        <script type="text/javascript">
+        // Chart data & properties
+        var data = {
+            labels: ["2015-07-13","2015-07-14","2015-07-15","2015-07-16","2015-07-17","2015-07-18","2015-07-19","2015-07-20","2015-07-21","2015-07-22"],
+            datasets: [
+                {
+                    label: "Data Statistik",
+                    fillColor: "rgba(0,0,0,0)",
+                    strokeColor: "rgba(66, 139, 202,1)",
+                    pointColor: "rgba(86, 66, 230, 1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(66, 139, 202, 0.5)",
+                    data: ["64","69","62","56","39","44","44","49","48","56"]
+                },
+                {
+                    label: "Rata-rata data",
+                    fillColor: "rgba(0,0,0,0)",
+                    strokeColor: "rgba(202, 77, 66, 1)",
+                    pointColor: "rgba(202, 0, 0, 1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "#FAAA78",
+                    data: ["64","66.5","65","62.75","58","55.67","54","53.38","52.78","53.1"]
+                }
+            ]
+        }
+
+        var ctx = document.getElementById("diagram").getContext("2d");
+        var diagramBaru = new Chart(ctx).Line(data, {
+                bezierCurve: false,
+                scaleShowVerticalLines: false,
+                //legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
+                responsive: true
+        });
+        document.getElementById('chart-legend').innerHTML = diagramBaru.generateLegend();
+        </script>
+    </body>
+</html>
